@@ -1,10 +1,10 @@
 package com.clarity.gmall.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.clarity.gmall.entity.UserAddress;
 import com.clarity.gmall.service.OrderService;
 import com.clarity.gmall.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
  * @date: 2022年11月16日 19:08
  */
 
-@Service
+// 该注释注解是 Spring 的
+// @Service
+@Service // 该注解是 Dubbo 的
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
+    @Reference
     private UserService userService;
 
     @Override

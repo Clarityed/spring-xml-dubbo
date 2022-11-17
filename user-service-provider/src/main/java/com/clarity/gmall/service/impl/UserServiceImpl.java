@@ -1,5 +1,6 @@
 package com.clarity.gmall.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.clarity.gmall.entity.UserAddress;
 import com.clarity.gmall.service.UserService;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author: clarity
  * @date: 2022年11月16日 18:54
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     @Override
