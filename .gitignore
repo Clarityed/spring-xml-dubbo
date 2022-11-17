@@ -1,0 +1,3 @@
+# Project exclude paths
+/gmall-interface/target/
+/user-service-provider/target/
