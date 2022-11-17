@@ -1,12 +1,16 @@
 package com.clarity.gmall.entity;
 
+import java.io.Serializable;
+
 /**
  * 用户实体类
  *
  * @author: clarity
  * @date: 2022年11月16日 18:48
  */
-public class UserAddress {
+public class UserAddress implements Serializable {
+
+    private static final long serialVersionUID = -1418653625096505365L;
 
     private Integer id;
     private String userAddress;

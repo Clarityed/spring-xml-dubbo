@@ -5,9 +5,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.IOException;
 
 /**
- * 功能描述
+ * 启动提供者服务
  *
- * @author: scott
+ * @author: clarity
  * @date: 2022年11月17日 8:16
  */
 public class MyApplication {

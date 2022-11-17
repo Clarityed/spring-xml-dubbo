@@ -3,22 +3,31 @@ package com.clarity.gmall.service.impl;
 import com.clarity.gmall.entity.UserAddress;
 import com.clarity.gmall.service.OrderService;
 import com.clarity.gmall.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * 功能描述
+ * 用户接口服务实现
  *
- * @author: scott
+ * @author: clarity
  * @date: 2022年11月16日 19:08
  */
+
+@Service
 public class OrderServiceImpl implements OrderService {
 
-    UserService userService;
+    @Autowired
+    private UserService userService;
+
     @Override
     public void initOrder(String userId) {
+        System.out.println("用户id：" + userId);
         List<UserAddress> userAddressList = userService.getUserAddressList(userId);
-        System.out.println(userAddressList);
+        List<String> addressList = userAddressList.stream().map(UserAddress::getUserAddress).collect(Collectors.toList());
+        addressList.forEach(System.out::println);
     }
 
 }
