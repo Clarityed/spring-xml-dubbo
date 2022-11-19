@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gmall-interface" />
+        <module name="spring-boot-order-service-consumer" />
         <module name="user-service-provider" />
         <module name="order-service-consumer" />
         <module name="spring-boot-user-service-provider" />
@@ -15,6 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-boot-order-service-consumer" options="-parameters" />
       <module name="spring-boot-user-service-provider" options="-parameters" />
     </option>
   </component>
