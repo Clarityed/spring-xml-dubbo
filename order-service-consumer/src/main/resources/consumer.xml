@@ -12,7 +12,12 @@
     <!--<dubbo:registry protocol="zookeeper" address="127.0.0.1" />-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181" />
     <!-- 3. 声明需要调用的远程服务的接口，生成远程服务代理 -->
-    <dubbo:annotation package="com.clarity.gmall.service.impl" />
+    <dubbo:annotation package="com.clarity.gmall.service" />
+    <!-- 4. 监控中心协议 -->
+    <!-- 4.1 如果 protocol="register"，表示从注册中心发现监控中心地址 -->
+    <dubbo:monitor protocol="register"/>
+    <!-- 4.2 直连监控中心 -->
+    <!--<dubbo:monitor address="127.0.0.1:7070"/>-->
 </beans>
 <!--
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

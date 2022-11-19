@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 // 该注释注解是 Spring 的
 // @Service
-@Service // 该注解是 Dubbo 的
+@Service// 该注解是 Dubbo 的
 public class OrderServiceImpl implements OrderService {
 
     @Reference

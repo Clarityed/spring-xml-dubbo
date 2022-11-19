@@ -15,6 +15,9 @@
     <dubbo:protocol name="dubbo" port="20890" />
     <!-- 4. 暴露服务 ref：指向服务的真正的真实对象 -->
     <dubbo:annotation package="com.clarity.gmall.service.impl" />
+    <!-- 4. 监控中心协议，如果 protocol="register"，表示从注册中心发现监控中心地址 -->
+    <dubbo:monitor protocol="register"/>
+    <!--<dubbo:monitor address="127.0.0.1:7070"/>-->
 </beans>
 <!--<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
