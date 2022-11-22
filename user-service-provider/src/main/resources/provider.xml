@@ -15,10 +15,14 @@
     <!--<dubbo:protocol name="dubbo" port="20891"/>-->
     <!-- 4. 暴露服务 ref：指向服务的真正的真实对象 -->
     <!-- 4.1 创建服务的真实对象 -->
-    <bean id="userServiceImpl" class="com.clarity.gmall.service.impl.UserServiceImpl"/>
+    <bean id="userServiceImpl1" class="com.clarity.gmall.service.impl.UserServiceImpl"/>
+    <bean id="userServiceImpl2" class="com.clarity.gmall.service.impl.UserServiceImpl2"/>
     <!-- 4.2 暴露服务，指向真实对象 -->
-    <dubbo:service interface="com.clarity.gmall.service.UserService" ref="userServiceImpl">
-        <dubbo:method name="getUserAddressList" timeout="1000"/>
+    <dubbo:service interface="com.clarity.gmall.service.UserService" ref="userServiceImpl1" version="1.0.0">
+        <dubbo:method name="getUserAddressList" timeout="6000"/>
+    </dubbo:service>
+    <dubbo:service interface="com.clarity.gmall.service.UserService" ref="userServiceImpl2" version="2.0.0">
+        <dubbo:method name="getUserAddressList" timeout="6000"/>
     </dubbo:service>
 </beans>
         <!-- 注解版 -->

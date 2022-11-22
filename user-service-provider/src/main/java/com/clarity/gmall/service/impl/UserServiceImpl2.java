@@ -14,11 +14,11 @@ import java.util.List;
  * @date: 2022年11月16日 18:54
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl2 implements UserService {
 
     @Override
     public List<UserAddress> getUserAddressList(String userId) {
-        System.out.println("UserServiceImpl:20890，old");
+        System.out.println("UserServiceImpl:20890，new");
 //        System.out.println("UserServiceImpl:20891");
         UserAddress userAddress1 = new UserAddress(1, "1", "1", "1", "1", "1");
         UserAddress userAddress2 = new UserAddress(2, "2", "2", "2", "2", "2");
