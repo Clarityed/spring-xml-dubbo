@@ -18,8 +18,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserAddress> getUserAddressList(String userId) {
+        System.out.println("UserServiceImpl:20890");
+//        System.out.println("UserServiceImpl:20891");
         UserAddress userAddress1 = new UserAddress(1, "1", "1", "1", "1", "1");
         UserAddress userAddress2 = new UserAddress(2, "2", "2", "2", "2", "2");
+        try {
+            // 让线程睡上 5 ms ，测试堵塞超时
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return Arrays.asList(userAddress1, userAddress2);
     }
 

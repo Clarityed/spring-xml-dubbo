@@ -1,4 +1,3 @@
-<!-- 注解版 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
        xmlns="http://www.springframework.org/schema/beans"
@@ -7,35 +6,39 @@
        http://dubbo.apache.org/schema/dubbo
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
     <!-- 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） -->
-    <dubbo:application name="user-service-provider" />
+    <dubbo:application name="user-service-provider"/>
     <!-- 2. 指定注册中兴的位置 -->
     <!--<dubbo:registry protocol="zookeeper" address="127.0.0.1" />-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 3. 指定通信规则 -->
-    <dubbo:protocol name="dubbo" port="20890" />
+    <dubbo:protocol name="dubbo" port="20890"/>
+    <!--<dubbo:protocol name="dubbo" port="20891"/>-->
     <!-- 4. 暴露服务 ref：指向服务的真正的真实对象 -->
-    <dubbo:annotation package="com.clarity.gmall.service.impl" />
-    <!-- 5. 监控中心协议，如果 protocol="register"，表示从注册中心发现监控中心地址 -->
-    <dubbo:monitor protocol="register"/>
-    <!--<dubbo:monitor address="127.0.0.1:7070"/>-->
+    <!-- 4.1 创建服务的真实对象 -->
+    <bean id="userServiceImpl" class="com.clarity.gmall.service.impl.UserServiceImpl"/>
+    <!-- 4.2 暴露服务，指向真实对象 -->
+    <dubbo:service interface="com.clarity.gmall.service.UserService" ref="userServiceImpl">
+        <dubbo:method name="getUserAddressList" timeout="1000"/>
+    </dubbo:service>
 </beans>
-<!--<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://dubbo.apache.org/schema/dubbo
-       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
-    &lt;!&ndash; 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） &ndash;&gt;
-    <dubbo:application name="user-service-provider" />
-    &lt;!&ndash; 2. 指定注册中兴的位置 &ndash;&gt;
-    &lt;!&ndash;<dubbo:registry protocol="zookeeper" address="127.0.0.1" />&ndash;&gt;
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
-    &lt;!&ndash; 3. 指定通信规则 &ndash;&gt;
-    <dubbo:protocol name="dubbo" port="20890" />
-    &lt;!&ndash; 4. 暴露服务 ref：指向服务的真正的真实对象 &ndash;&gt;
-    &lt;!&ndash; 4.1 创建服务的真实对象 &ndash;&gt;
-    <bean id="userServiceImpl" class="com.clarity.gmall.service.impl.UserServiceImpl" />
-    &lt;!&ndash; 4.2 暴露服务，指向真实对象 &ndash;&gt;
-    <dubbo:service interface="com.clarity.gmall.service.UserService" ref="userServiceImpl" />
-</beans>-->
+        <!-- 注解版 -->
+        <!--<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+               xmlns="http://www.springframework.org/schema/beans"
+               xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://dubbo.apache.org/schema/dubbo
+               http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+            &lt;!&ndash; 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） &ndash;&gt;
+            <dubbo:application name="user-service-provider" />
+            &lt;!&ndash; 2. 指定注册中兴的位置 &ndash;&gt;
+            &lt;!&ndash;<dubbo:registry protocol="zookeeper" address="127.0.0.1" />&ndash;&gt;
+            <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+            &lt;!&ndash; 3. 指定通信规则 &ndash;&gt;
+            <dubbo:protocol name="dubbo" port="20890" />
+            &lt;!&ndash; 4. 暴露服务 ref：指向服务的真正的真实对象 &ndash;&gt;
+            <dubbo:annotation package="com.clarity.gmall.service.impl" />
+            &lt;!&ndash; 5. 监控中心协议，如果 protocol="register"，表示从注册中心发现监控中心地址 &ndash;&gt;
+            <dubbo:monitor protocol="register"/>
+            &lt;!&ndash;<dubbo:monitor address="127.0.0.1:7070"/>&ndash;&gt;
+        </beans>-->

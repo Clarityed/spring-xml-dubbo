@@ -1,25 +1,3 @@
-<!-- 注解版 -->
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://dubbo.apache.org/schema/dubbo
-       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
-    <!-- 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） -->
-    <dubbo:application name="order-service-consumer" />
-    <!-- 2. 指定注册中兴的位置 -->
-    <!--<dubbo:registry protocol="zookeeper" address="127.0.0.1" />-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
-    <!-- 3. 声明需要调用的远程服务的接口，生成远程服务代理 -->
-    <dubbo:annotation package="com.clarity.gmall.service" />
-    <!-- 4. 监控中心协议 -->
-    <!-- 4.1 如果 protocol="register"，表示从注册中心发现监控中心地址 -->
-    <dubbo:monitor protocol="register"/>
-    <!-- 4.2 直连监控中心 -->
-    <!--<dubbo:monitor address="127.0.0.1:7070"/>-->
-</beans>
-<!--
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
        xmlns="http://www.springframework.org/schema/beans"
@@ -30,13 +8,45 @@
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
-    &lt;!&ndash; 扫描对象 &ndash;&gt;
+
+    <!-- 扫描对象 -->
     <context:component-scan base-package="com.clarity.gmall.service.impl"/>
-    &lt;!&ndash; 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） &ndash;&gt;
-    <dubbo:application name="order-service-consumer" />
-    &lt;!&ndash; 2. 指定注册中兴的位置 &ndash;&gt;
-    &lt;!&ndash;<dubbo:registry protocol="zookeeper" address="127.0.0.1" />&ndash;&gt;
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
-    &lt;!&ndash; 3. 声明需要调用的远程服务的接口，生成远程服务代理 &ndash;&gt;
-    <dubbo:reference interface="com.clarity.gmall.service.UserService" id="userService" />
-</beans>-->
+    <!-- 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） -->
+    <dubbo:application name="order-service-consumer"/>
+    <!-- 2. 指定注册中兴的位置 -->
+    <!--<dubbo:registry protocol="zookeeper" address="127.0.0.1" />-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!-- 3. 声明需要调用的远程服务的接口，生成远程服务代理 -->
+    <!--
+        (1) 精确优先（方法级优先，接口级次之，全局配置再次之）
+        (2) 消费者配置优先（如果级别一样，则消费者优先，提供方次之）
+     -->
+    <!-- timeout 默认是 1000 ms -->
+    <!-- retries 重试次数，不包含第一次调用次数，0 代表不重试 -->
+    <dubbo:reference interface="com.clarity.gmall.service.UserService" id="userService" timeout="6000">
+        <dubbo:method name="getUserAddressList" retries="3"/>
+    </dubbo:reference>
+    <!-- 配置当前消费者的统一规则 -->
+    <dubbo:consumer check="false"/>
+</beans>
+        <!-- 注解版 -->
+        <!--<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+               xmlns="http://www.springframework.org/schema/beans"
+               xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://dubbo.apache.org/schema/dubbo
+               http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+            &lt;!&ndash; 1. 指定当前服务 / 应用的名字（同样的服务名字相同，不要和别的服务同名） &ndash;&gt;
+            <dubbo:application name="order-service-consumer" />
+            &lt;!&ndash; 2. 指定注册中兴的位置 &ndash;&gt;
+            &lt;!&ndash;<dubbo:registry protocol="zookeeper" address="127.0.0.1" />&ndash;&gt;
+            <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+            &lt;!&ndash; 3. 声明需要调用的远程服务的接口，生成远程服务代理 &ndash;&gt;
+            <dubbo:annotation package="com.clarity.gmall.service" />
+            &lt;!&ndash; 4. 监控中心协议 &ndash;&gt;
+            &lt;!&ndash; 4.1 如果 protocol="register"，表示从注册中心发现监控中心地址 &ndash;&gt;
+            <dubbo:monitor protocol="register"/>
+            &lt;!&ndash; 4.2 直连监控中心 &ndash;&gt;
+            &lt;!&ndash;<dubbo:monitor address="127.0.0.1:7070"/>&ndash;&gt;
+        </beans>-->
