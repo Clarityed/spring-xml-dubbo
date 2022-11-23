@@ -23,7 +23,7 @@
      -->
     <!-- timeout 默认是 1000 ms -->
     <!-- retries 重试次数，不包含第一次调用次数，0 代表不重试 -->
-    <dubbo:reference interface="com.clarity.gmall.service.UserService" id="userService" timeout="6000" version="2.0.0" stub="com.clarity.gmall.service.stub.UserServiceStub">
+    <dubbo:reference interface="com.clarity.gmall.service.UserService" id="userService" timeout="6000" version="1.0.0" stub="com.clarity.gmall.service.stub.UserServiceStub">
         <dubbo:method name="getUserAddressList" retries="3"/>
     </dubbo:reference>
     <!-- 配置当前消费者的统一规则 -->

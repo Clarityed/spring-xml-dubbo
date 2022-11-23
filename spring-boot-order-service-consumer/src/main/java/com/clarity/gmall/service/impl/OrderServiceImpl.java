@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
  * @date: 2022年11月16日 19:08
  */
 
-// 该注释注解是 Spring 的
-// @Service
-@Service// 该注解是 Dubbo 的
+// @Service // 该注解是 Dubbo 的
+@Service// 该注释注解是 Spring 的
 public class OrderServiceImpl implements OrderService {
 
-    @Reference
+    @Reference(url = "127.0.0.1:20890", version = "1.0.0", stub = "com.clarity.gmall.service.stub.UserServiceStub")
     private UserService userService;
 
     @Override
